@@ -313,17 +313,31 @@ function gear(parent,{teeth,r,thick,mat,pos,axis='y',hole,spokes}){
     rg.position.z=-.24+i*.22; rg.scale.set(1,1,.6); body.add(rg);}
 })();
 
-/* ---- 4.3 机芯齿轮组（胸部上方，外露咬合）---- */
+/* ---- 4.3 机芯：中央金齿轮 + 4 枚皇家蓝珐琅盘（各嵌小金齿轮+珍珠）---- */
 (function movement(){
-  const mv=new THREE.Group(); mv.position.set(0,.42,-.1); body.add(reg(mv,new THREE.Vector3(0,1,0),1.3,'Movement','26-tooth escapement train · 2.3 Hz'));
-  const g1=gear(mv,{teeth:26,r:.34,thick:.09,mat:M.gold,pos:new THREE.Vector3(0,0,0),hole:.07,spokes:5});
-  const g2=gear(mv,{teeth:16,r:.2,thick:.07,mat:M.brass,pos:new THREE.Vector3(.5,.02,.16),hole:.05,spokes:3});
-  const g3=gear(mv,{teeth:13,r:.16,thick:.06,mat:M.steel,pos:new THREE.Vector3(-.44,.02,.2),hole:.04});
-  const g4=gear(mv,{teeth:10,r:.12,thick:.05,mat:M.gold,pos:new THREE.Vector3(.24,.02,-.42),hole:.03});
-  RATIOS.push([g1,1],[g2,-26/16],[g3,26/13],[g4,-26/10]);
-  const gem=new THREE.Mesh(new THREE.OctahedronGeometry(.1,0),M.sapphire); mv.add(gem);
-  const halo=new THREE.Mesh(new THREE.SphereGeometry(.055,12,10),M.glow); mv.add(halo);
-  mv.userData.core={gem,halo};
+  const mv=new THREE.Group(); mv.position.set(0,.34,-.05); body.add(reg(mv,new THREE.Vector3(0,1,0),1.3,'Movement','26-tooth escapement train · 2.3 Hz'));
+  // 中央主齿轮（金）+ 蓝宝石凸圆顶
+  const g1=gear(mv,{teeth:26,r:.3,thick:.08,mat:M.gold,pos:new THREE.Vector3(0,.02,0),hole:.06,spokes:6});
+  RATIOS.push([g1,1]);
+  const cab=new THREE.Mesh(new THREE.SphereGeometry(.11,20,14,0,Math.PI*2,0,Math.PI*.55),M.sapphire);
+  cab.position.set(0,.07,0); mv.add(cab);
+  const halo=new THREE.Mesh(new THREE.SphereGeometry(.05,12,10),M.glow); halo.position.set(0,.12,0); mv.add(halo);
+  mv.userData.core={gem:cab,halo};
+  // 4 枚皇家蓝珐琅盘，环绕中心，位于四翅根处
+  const blue=new THREE.MeshStandardMaterial({color:0x27408f,metalness:.25,roughness:.28,envMapIntensity:1.4,clearcoat:0});
+  const discPos=[[.62,.18],[.62,-.42],[-.62,.18],[-.62,-.42]];
+  discPos.forEach((dp,i)=>{
+    const d=new THREE.Group(); d.position.set(dp[0],.03,dp[1]); mv.add(d);
+    const plate=new THREE.Mesh(new THREE.CylinderGeometry(.2,.2,.03,32),blue); plate.castShadow=true; d.add(plate);
+    const rim=new THREE.Mesh(new THREE.TorusGeometry(.2,.018,8,32),M.gold); rim.rotation.x=Math.PI/2; rim.position.y=.015; d.add(rim);
+    const gg=gear(d,{teeth:14,r:.12,thick:.03,mat:M.gold,pos:new THREE.Vector3(0,.035,0),hole:.04,spokes:4});
+    RATIOS.push([gg,(i%2?-1:1)*26/14]);
+    const pearl=new THREE.Mesh(new THREE.SphereGeometry(.045,14,12),M.glow); pearl.position.set(0,.06,0); d.add(pearl);
+    // 盘缘三颗小珍珠
+    for(let k=0;k<3;k++){const a=k/3*Math.PI*2+.4;
+      const p=new THREE.Mesh(new THREE.SphereGeometry(.018,8,6),M.glow);
+      p.position.set(Math.cos(a)*.15,.02,Math.sin(a)*.15); d.add(p);}
+  });
 })();
 
 /* ---- 4.4 头部 + 蓝宝石眼 + 触角 ---- */
@@ -397,28 +411,30 @@ function buildWingPair(kind,scale){
     const rod=new THREE.Mesh(new THREE.CylinderGeometry(.009,.005,1,6),M.gold);
     link(rod,root,tp); side.add(rod);
   }
-  // 金齿轮簇（蚀刻装饰）：以翅形 (x,y) 坐标定义，映射到翅面局部 (x,0,-y)
+  // 金齿轮簇：不规则密集齿轮群（复刻视频中"发条零件堆"质感），沿翅脉方向排布
   const clusters=kind==='fore'
-    ? [[1.15,1.05],[1.95,1.25],[1.75,0.35],[0.85,0.55]]
-    : [[1.15,-0.25],[1.05,-0.95],[1.75,-0.35],[0.7,-0.45]];
+    ? [{c:[1.15,1.05],n:16,sp:.42,ang:.55},{c:[2.0,1.2],n:13,sp:.34,ang:-.5},{c:[0.85,0.5],n:11,sp:.30,ang:.35}]
+    : [{c:[1.15,-0.3],n:13,sp:.36,ang:.45},{c:[1.05,-1.0],n:12,sp:.32,ang:-.35},{c:[1.7,-0.4],n:9,sp:.28,ang:.2}];
   const clusterGears=[];
   const toLocal=(x,y)=>new THREE.Vector3(x,0,-y);
-  clusters.forEach(([cx,cy])=>{
-    const c=toLocal(cx,cy);
-    // 中心大齿轮 + 6 枚花瓣小齿轮，组成整齐玫瑰结
-    const cg=gear(side,{teeth:12,r:.15,thick:.03,mat:M.gold,pos:c.clone().setY(.03),hole:.05,spokes:4});
-    clusterGears.push(cg.mesh);
-    for(let k=0;k<6;k++){
-      const a=k/6*Math.PI*2;
-      const ox=Math.cos(a)*.2, oy=Math.sin(a)*.2;
-      const p=toLocal(cx+ox,cy+oy);
-      const g=gear(side,{teeth:8,r:.075,thick:.024,mat:k%2?M.brass:M.gold,
-        pos:p.setY(.018),hole:.022});
+  const rng=(s=>()=>{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;})(kind==='fore'?7:31);
+  clusters.forEach(cl=>{
+    const ga=Math.PI*(3-Math.sqrt(5));            // 黄金角，形成自然堆叠
+    for(let k=0;k<cl.n;k++){
+      const rad=cl.sp*Math.sqrt((k+.5)/cl.n);       // 面积均匀散布
+      const a=k*ga+(rng()-.5)*.6;                   // 抖动，避免规则感
+      const ox=Math.cos(a)*rad*1.25, oy=Math.sin(a)*rad*.85;
+      const rr=.045+rng()*.075;                      // 大小不一
+      const p=toLocal(cl.c[0]+ox,cl.c[1]+oy);
+      const g=gear(side,{teeth:7+Math.floor(rr*70),r:rr,thick:.02+rng()*.02,
+        mat:rng()>.45?M.gold:M.brass,pos:p.setY(.012+rng()*.03),hole:rr*.26,spokes:rng()>.7?3:0});
       clusterGears.push(g.mesh);
     }
-    // 一颗蓝宝石轴心
-    const gem=new THREE.Mesh(new THREE.SphereGeometry(.03,10,8),M.sapphire);
-    gem.position.copy(c).setY(.05); side.add(gem);
+    // 群中点缀一颗蓝宝石 + 一颗珍珠
+    const gem=new THREE.Mesh(new THREE.SphereGeometry(.028,10,8),M.sapphire);
+    gem.position.copy(toLocal(cl.c[0],cl.c[1])).setY(.05); side.add(gem);
+    const pr=new THREE.Mesh(new THREE.SphereGeometry(.02,10,8),M.glow);
+    pr.position.copy(toLocal(cl.c[0]+cl.sp*.5,cl.c[1]+cl.sp*.3)).setY(.045); side.add(pr);
   });
   // 翅根大齿轮
   const rootGear=gear(side,{teeth:14,r:.16,thick:.05,mat:M.gold,pos:new THREE.Vector3(.12,.03,-.08),hole:.05,spokes:4});
