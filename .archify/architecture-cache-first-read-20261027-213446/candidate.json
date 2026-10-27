@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "浏览器读取链路：缓存优先，数据库兜底",
+    "locale": "zh-CN",
+    "output": ".archify/architecture-cache-first-read-20261027-213446/cache-first-read.html",
+    "quality_profile": "showcase"
+  },
+  "components": [
+    { "id": "browser", "type": "external", "label": "浏览器", "sublabel": "用户端", "pos": [40, 140], "size": [130, 64] },
+    { "id": "gateway", "type": "backend", "label": "API 网关", "sublabel": "统一入口", "pos": [290, 140], "size": [160, 64] },
+    { "id": "redis", "type": "database", "label": "Redis 缓存", "sublabel": "热数据", "pos": [540, 140], "size": [150, 64] },
+    { "id": "postgres", "type": "database", "label": "PostgreSQL", "sublabel": "兜底数据源", "pos": [540, 330], "size": [150, 64] }
+  ],
+  "boundaries": [
+    { "kind": "security-group", "label": "服务端内网", "wraps": ["gateway", "redis", "postgres"] }
+  ],
+  "connections": [
+    { "id": "browser-to-gateway", "from": "browser", "to": "gateway", "label": "发起请求", "variant": "emphasis" },
+    { "id": "gateway-to-redis", "from": "gateway", "to": "redis", "label": "读缓存", "variant": "emphasis" },
+    { "id": "redis-to-postgres", "from": "redis", "to": "postgres", "label": "未命中回源", "fromSide": "bottom", "toSide": "top" }
+  ],
+  "cards": [
+    { "dot": "emerald", "title": "读取策略", "items": ["Redis 承接热数据读取，命中即返回", "缓存未命中时才回源 PostgreSQL 兜底"] }
+  ]
+}

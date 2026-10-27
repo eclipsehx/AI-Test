@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "af17f9ba-e4a7-4bda-87af-9d6a8e0fff50",
+  "status": "current",
+  "command": "deliver",
+  "type": "architecture",
+  "input": "/workspace/.archify/architecture-cache-first-read-20261027-213446/candidate.json",
+  "output": "/workspace/.archify/architecture-cache-first-read-20261027-213446/cache-first-read.html",
+  "specification": {
+    "sha256": "c123998b0891ac4c1c48e7499f3af545387af1d940c8f2ef711da2eda58805a4",
+    "bytes": 1549
+  },
+  "artifact": {
+    "sha256": "34ba268b1c537b2478aa40d9ef4f023c89cf0ce807571ba4d92e7ca07932dfef",
+    "bytes": 831537
+  }
+}

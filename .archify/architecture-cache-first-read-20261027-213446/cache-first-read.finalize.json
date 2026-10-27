@@ -1,0 +1,374 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "skipped",
+  "type": "architecture",
+  "quality": "showcase",
+  "startedAt": "2026-10-27T13:35:06.273Z",
+  "specification": {
+    "path": "/workspace/.archify/architecture-cache-first-read-20261027-213446/candidate.json",
+    "sha256": "c123998b0891ac4c1c48e7499f3af545387af1d940c8f2ef711da2eda58805a4",
+    "bytes": 1549
+  },
+  "artifact": {
+    "path": "/workspace/.archify/architecture-cache-first-read-20261027-213446/cache-first-read.html",
+    "sha256": "34ba268b1c537b2478aa40d9ef4f023c89cf0ce807571ba4d92e7ca07932dfef",
+    "bytes": 831537
+  },
+  "stages": {
+    "validate": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": null,
+      "execution": "embedded-in-deliver",
+      "command": [
+        "/root/.nvm/versions/node/v24.1.0/bin/node",
+        "/workspace/.trae/skills/archify/bin/archify.mjs",
+        "deliver",
+        "architecture",
+        "/workspace/.archify/architecture-cache-first-read-20261027-213446/candidate.json",
+        "/workspace/.archify/architecture-cache-first-read-20261027-213446/cache-first-read.html",
+        "--quality",
+        "showcase",
+        "--json"
+      ],
+      "receipt": {
+        "schemaVersion": 1,
+        "ok": true,
+        "command": "validate",
+        "specification": {
+          "sha256": "c123998b0891ac4c1c48e7499f3af545387af1d940c8f2ef711da2eda58805a4",
+          "bytes": 1549
+        },
+        "validation": {
+          "checksPassed": 9,
+          "checkCount": 9,
+          "compositionProfile": "showcase",
+          "compositionStatus": "pass",
+          "errors": 0,
+          "warnings": 0
+        }
+      }
+    },
+    "deliver": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 904,
+      "command": [
+        "/root/.nvm/versions/node/v24.1.0/bin/node",
+        "/workspace/.trae/skills/archify/bin/archify.mjs",
+        "deliver",
+        "architecture",
+        "/workspace/.archify/architecture-cache-first-read-20261027-213446/candidate.json",
+        "/workspace/.archify/architecture-cache-first-read-20261027-213446/cache-first-read.html",
+        "--quality",
+        "showcase",
+        "--json"
+      ],
+      "receipt": {
+        "schemaVersion": 1,
+        "receiptId": "af17f9ba-e4a7-4bda-87af-9d6a8e0fff50",
+        "ok": true,
+        "command": "deliver",
+        "type": "architecture",
+        "input": "/workspace/.archify/architecture-cache-first-read-20261027-213446/candidate.json",
+        "output": "/workspace/.archify/architecture-cache-first-read-20261027-213446/cache-first-read.html",
+        "specification": {
+          "sha256": "c123998b0891ac4c1c48e7499f3af545387af1d940c8f2ef711da2eda58805a4",
+          "bytes": 1549
+        },
+        "artifact": {
+          "sha256": "34ba268b1c537b2478aa40d9ef4f023c89cf0ce807571ba4d92e7ca07932dfef",
+          "bytes": 831537
+        },
+        "validation": {
+          "checksPassed": 9,
+          "checkCount": 9,
+          "compositionProfile": "showcase",
+          "compositionStatus": "pass",
+          "errors": 0,
+          "warnings": 0
+        },
+        "update": {
+          "status": "unavailable",
+          "installedVersion": null,
+          "availableVersion": null,
+          "releaseNotes": null,
+          "checkedAt": null,
+          "source": null,
+          "noticeRequired": false,
+          "noticeText": null,
+          "reason": "disabled"
+        }
+      }
+    },
+    "check": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 551,
+      "command": [
+        "/root/.nvm/versions/node/v24.1.0/bin/node",
+        "/workspace/.trae/skills/archify/bin/archify.mjs",
+        "check",
+        "/workspace/.archify/architecture-cache-first-read-20261027-213446/cache-first-read.html",
+        "--require-provenance"
+      ],
+      "receipt": {
+        "ok": true,
+        "file": "/workspace/.archify/architecture-cache-first-read-20261027-213446/cache-first-read.html",
+        "artifact": {
+          "sha256": "34ba268b1c537b2478aa40d9ef4f023c89cf0ce807571ba4d92e7ca07932dfef",
+          "bytes": 831537
+        },
+        "checks": [
+          {
+            "name": "single_svg",
+            "ok": true,
+            "details": [
+              "found 1 <svg> block(s)"
+            ]
+          },
+          {
+            "name": "finite_svg",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "orthogonal_arrows",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "label_route_clearance",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "relationship_crossings",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "relationship_corridors",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "container_border_runs",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "route_rhythm",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "legend_clearance",
+            "ok": true,
+            "details": []
+          }
+        ],
+        "composition": {
+          "schemaVersion": 1,
+          "profile": "showcase",
+          "status": "pass",
+          "summary": {
+            "errors": 0,
+            "warnings": 0
+          },
+          "metrics": {
+            "properCrossings": 0,
+            "resolvedCrossovers": 0,
+            "ambiguousCorridors": 0,
+            "arrowheadCollisions": 0,
+            "containerBorderRuns": 0,
+            "labelRouteClearanceIssues": 0,
+            "labelCanvasOverflowIssues": 0,
+            "minLabelRouteClearance": 88.7,
+            "desktopReadabilityIssues": 0,
+            "viewportHeightIssues": 0,
+            "minProjectedNodeTextPx": 8,
+            "maxBends": 0,
+            "routesOverSuggestedBends": 0,
+            "maxStretch": 1,
+            "routesOverSuggestedStretch": 0,
+            "minSegmentPx": 90,
+            "minInteriorSegmentPx": null,
+            "shortSegmentCount": 0,
+            "shortEndpointSegmentCount": 0,
+            "shortInteriorSegmentCount": 0,
+            "microSegmentCount": 0
+          },
+          "suggestedLimits": {
+            "bendsPerRelationship": 2,
+            "stretch": 1.35,
+            "segmentPx": 16,
+            "microSegmentPx": 8
+          },
+          "routeReview": {
+            "crossings": [],
+            "detours": []
+          },
+          "leadingSpace": {
+            "measured": true,
+            "emptyTopPx": 110,
+            "emptyTopRatio": 0.228,
+            "occupiedTop": 110,
+            "viewBoxTop": 0,
+            "canvasHeight": 482,
+            "typicalNodeHeight": 64,
+            "reviewSuggested": false
+          },
+          "desktopReadability": {
+            "budgetBasis": "recognized-declared-wide",
+            "readerContract": "declared-wide-v1",
+            "availableDiagramWidth": 930,
+            "actualBudgetPx": 930,
+            "actualReaderWidth": 960,
+            "desiredReaderWidth": 960,
+            "viewportCap": 1376,
+            "limit": "source-size",
+            "requestedTargetPx": 7.5,
+            "requestedTargetMet": true,
+            "hardFloorPx": 6,
+            "hardFloorMet": true,
+            "minimumOwner": {
+              "kind": "edge",
+              "id": "browser-to-gateway",
+              "from": "browser",
+              "to": "gateway"
+            },
+            "minimumSourceTextPx": 8,
+            "minimumProjectedTextPx": 8,
+            "semanticTextCount": 12
+          },
+          "issues": []
+        },
+        "provenance": "current",
+        "deliveryReceiptId": "af17f9ba-e4a7-4bda-87af-9d6a8e0fff50"
+      }
+    },
+    "browser-check": {
+      "status": "skipped",
+      "exitCode": 2,
+      "durationMs": 36,
+      "command": [
+        "/root/.nvm/versions/node/v24.1.0/bin/node",
+        "/workspace/.trae/skills/archify/bin/archify.mjs",
+        "browser-check",
+        "/workspace/.archify/architecture-cache-first-read-20261027-213446/cache-first-read.html",
+        "--json",
+        "--require-provenance"
+      ],
+      "execution": "in-process",
+      "receipt": {
+        "schemaVersion": 1,
+        "ok": false,
+        "command": "browser-check",
+        "evidenceKind": "automated-browser",
+        "status": "skipped",
+        "visualReview": "not-requested",
+        "provenance": "current",
+        "deliveryReceiptId": "af17f9ba-e4a7-4bda-87af-9d6a8e0fff50",
+        "artifact": {
+          "path": "/workspace/.archify/architecture-cache-first-read-20261027-213446/cache-first-read.html",
+          "sha256": "34ba268b1c537b2478aa40d9ef4f023c89cf0ce807571ba4d92e7ca07932dfef",
+          "bytes": 831537
+        },
+        "state": {
+          "detail": "read",
+          "motion": "still"
+        },
+        "chrome": {
+          "status": "unavailable",
+          "executable": null
+        },
+        "diagnostics": [
+          {
+            "code": "viewer/chrome-unavailable",
+            "severity": "warning",
+            "message": "No supported browser found. Install Chrome/Chromium (or Microsoft Edge), or set ARCHIFY_CHROME to its executable path.",
+            "subject": {
+              "artifact": "/workspace/.archify/architecture-cache-first-read-20261027-213446/cache-first-read.html"
+            },
+            "evidence": {
+              "executable": null
+            },
+            "supportedFixes": [
+              "set ARCHIFY_CHROME to a Chrome/Chromium executable (or Microsoft Edge) and rerun browser-check"
+            ]
+          }
+        ],
+        "containment": {
+          "status": "skipped",
+          "policy": "fit-or-reader-declared-readable-vertical-scroll",
+          "viewports": []
+        },
+        "themeStates": {
+          "status": "skipped",
+          "viewports": []
+        },
+        "readability": {
+          "status": "skipped",
+          "minimumProjectedNodeTextPx": 6,
+          "viewports": []
+        },
+        "viewerChrome": {
+          "status": "skipped",
+          "viewports": []
+        },
+        "captures": {
+          "status": "not-requested",
+          "screenshots": [],
+          "contactSheet": null
+        },
+        "sidecars": {
+          "receipt": "cache-first-read.browser-check.json",
+          "files": []
+        },
+        "error": "No supported browser found. Install Chrome/Chromium (or Microsoft Edge), or set ARCHIFY_CHROME to its executable path."
+      }
+    }
+  },
+  "browserCheck": {
+    "requested": true,
+    "ran": false
+  },
+  "diagnostics": [
+    {
+      "code": "viewer/chrome-unavailable",
+      "severity": "warning",
+      "message": "No supported browser found. Install Chrome/Chromium (or Microsoft Edge), or set ARCHIFY_CHROME to its executable path.",
+      "subject": {
+        "artifact": "/workspace/.archify/architecture-cache-first-read-20261027-213446/cache-first-read.html"
+      },
+      "evidence": {
+        "executable": null
+      },
+      "supportedFixes": [
+        "set ARCHIFY_CHROME to a Chrome/Chromium executable (or Microsoft Edge) and rerun browser-check"
+      ]
+    }
+  ],
+  "evidence": {
+    "receipt": "/workspace/.archify/architecture-cache-first-read-20261027-213446/cache-first-read.finalize.json",
+    "summaryReceipt": "/workspace/.archify/architecture-cache-first-read-20261027-213446/cache-first-read.finalize-summary.json",
+    "browserCheckReceipt": "/workspace/.archify/architecture-cache-first-read-20261027-213446/cache-first-read.browser-check.json"
+  },
+  "visualReview": "not-requested",
+  "failedStage": "browser-check",
+  "finishedAt": "2026-10-27T13:35:07.866Z",
+  "durationMs": 1593,
+  "update": {
+    "status": "current",
+    "installedVersion": "3.2.0",
+    "availableVersion": "3.2.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-27T13:35:06.541Z",
+    "source": "network",
+    "noticeRequired": false,
+    "noticeText": null
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "skipped",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "/workspace/.archify/architecture-cache-first-read-20261027-213446/candidate.json",
+    "sha256": "c123998b0891ac4c1c48e7499f3af545387af1d940c8f2ef711da2eda58805a4",
+    "bytes": 1549
+  },
+  "artifact": {
+    "path": "/workspace/.archify/architecture-cache-first-read-20261027-213446/cache-first-read.html",
+    "sha256": "34ba268b1c537b2478aa40d9ef4f023c89cf0ce807571ba4d92e7ca07932dfef",
+    "bytes": 831537
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "skipped"
+  },
+  "failedStage": "browser-check",
+  "diagnostics": [
+    {
+      "code": "viewer/chrome-unavailable",
+      "severity": "warning",
+      "message": "No supported browser found. Install Chrome/Chromium (or Microsoft Edge), or set ARCHIFY_CHROME to its executable path.",
+      "subject": {
+        "artifact": "/workspace/.archify/architecture-cache-first-read-20261027-213446/cache-first-read.html"
+      },
+      "evidence": {
+        "executable": null
+      },
+      "supportedFixes": [
+        "set ARCHIFY_CHROME to a Chrome/Chromium executable (or Microsoft Edge) and rerun browser-check"
+      ]
+    }
+  ],
+  "diagnosticSummary": {
+    "total": 1,
+    "shown": 1,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "/workspace/.archify/architecture-cache-first-read-20261027-213446/cache-first-read.finalize.json",
+    "summaryReceipt": "/workspace/.archify/architecture-cache-first-read-20261027-213446/cache-first-read.finalize-summary.json",
+    "browserCheckReceipt": "/workspace/.archify/architecture-cache-first-read-20261027-213446/cache-first-read.browser-check.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.2.0",
+    "availableVersion": "3.2.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-27T13:35:06.541Z",
+    "source": "network",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 1593,
+  "browserCheck": {
+    "requested": true,
+    "ran": false
+  }
+}
