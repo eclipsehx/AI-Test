@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "skipped",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "/workspace/.archify/architecture-idp-private-cloud-20261027-215723/candidate.json",
+    "sha256": "94f41fb7c46cf8546505563fdc19c4f91d28f322957a857e278b5f1eed57bbfe",
+    "bytes": 5109
+  },
+  "artifact": {
+    "path": "/workspace/idp-private-cloud.html",
+    "sha256": "277ec69b4a6ce98112c258c51b9fe3e52326143d331f9e0af2c3889cfc2d5b14",
+    "bytes": 858402
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "skipped"
+  },
+  "failedStage": "browser-check",
+  "diagnostics": [
+    {
+      "code": "viewer/chrome-unavailable",
+      "severity": "warning",
+      "message": "No supported browser found. Install Chrome/Chromium (or Microsoft Edge), or set ARCHIFY_CHROME to its executable path.",
+      "subject": {
+        "artifact": "/workspace/idp-private-cloud.html"
+      },
+      "evidence": {
+        "executable": null
+      },
+      "supportedFixes": [
+        "set ARCHIFY_CHROME to a Chrome/Chromium executable (or Microsoft Edge) and rerun browser-check"
+      ]
+    }
+  ],
+  "diagnosticSummary": {
+    "total": 1,
+    "shown": 1,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "/workspace/.archify/architecture-idp-private-cloud-20261027-215723/review-4/idp-private-cloud.finalize.json",
+    "summaryReceipt": "/workspace/.archify/architecture-idp-private-cloud-20261027-215723/review-4/idp-private-cloud.finalize-summary.json",
+    "browserCheckReceipt": "/workspace/.archify/architecture-idp-private-cloud-20261027-215723/review-4/idp-private-cloud.browser-check.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.2.0",
+    "availableVersion": "3.2.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-27T15:41:33.530Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 1652,
+  "browserCheck": {
+    "requested": true,
+    "ran": false
+  }
+}

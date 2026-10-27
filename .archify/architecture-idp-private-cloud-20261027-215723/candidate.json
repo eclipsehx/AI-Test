@@ -35,7 +35,8 @@
   ],
   "connections": [
     { "id": "office-to-lb", "from": "office", "to": "lb", "label": "接入", "variant": "emphasis" },
-    { "id": "lb-to-app1", "from": "lb", "to": "app1", "label": "负载分发", "variant": "emphasis", "fromSide": "bottom", "toSide": "top" },
+    { "id": "lb-to-app1", "from": "lb", "to": "app1", "variant": "emphasis", "fromSide": "bottom", "toSide": "top" },
+    { "id": "lb-to-app2", "from": "lb", "to": "app2", "variant": "emphasis", "fromSide": "bottom", "toSide": "left", "via": [[430, 205], [530, 205], [530, 272]] },
     { "id": "app2-to-sso", "from": "app2", "to": "sso", "label": "SSO 单点登录", "variant": "security", "fromSide": "top", "toSide": "bottom" },
     { "id": "cfs-to-integration", "from": "cfs", "to": "integration", "label": "内部集成", "fromSide": "top", "toSide": "bottom" },
     { "id": "integration-to-ocr", "from": "integration", "to": "ocr", "label": "OCR 识别" },

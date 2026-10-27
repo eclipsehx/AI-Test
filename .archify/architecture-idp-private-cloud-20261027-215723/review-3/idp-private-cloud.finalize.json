@@ -1,0 +1,157 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "fail",
+  "type": "architecture",
+  "quality": "showcase",
+  "startedAt": "2026-10-27T15:41:33.269Z",
+  "specification": {
+    "path": "/workspace/.archify/architecture-idp-private-cloud-20261027-215723/candidate.json",
+    "sha256": "8db92d551b897e494810d9b6447734135dc058c178359a54d468d3e4597e4c38",
+    "bytes": 5109
+  },
+  "artifact": {
+    "path": "/workspace/idp-private-cloud.html",
+    "sha256": "444087c52b0d885dbe7566ff3a1c8506613f5a639b89c80e8cac6f982dd6ba6c",
+    "bytes": 858419
+  },
+  "stages": {
+    "validate": {
+      "status": "fail",
+      "exitCode": 1,
+      "durationMs": null,
+      "command": [
+        "/root/.nvm/versions/node/v24.1.0/bin/node",
+        "/workspace/.trae/skills/archify/bin/archify.mjs",
+        "deliver",
+        "architecture",
+        "/workspace/.archify/architecture-idp-private-cloud-20261027-215723/candidate.json",
+        "/workspace/idp-private-cloud.html",
+        "--quality",
+        "showcase",
+        "--json"
+      ],
+      "receipt": {
+        "schemaVersion": 1,
+        "ok": false,
+        "command": "deliver",
+        "receiptId": "c7dc2a8e-7bb2-4c89-86ef-b7ab2d150475",
+        "stage": "render",
+        "type": "architecture",
+        "input": "/workspace/.archify/architecture-idp-private-cloud-20261027-215723/candidate.json",
+        "output": "/workspace/idp-private-cloud.html",
+        "error": "Architecture layout validation failed:\n- [clean-flow/endpoint-side-direction] architecture connections[2] id \"lb-to-app2\" \"lb\" -> \"app2\" first segment 0 [430, 104] -> [470, 205] does not honor fromSide \"bottom\" — it must run vertical downward; keep automatic routing so the renderer can use a side-aware bridge, or set truthful fromSide/toSide with perpendicular via segments.",
+        "diagnostics": [
+          {
+            "code": "clean-flow/endpoint-side-direction",
+            "severity": "error",
+            "message": "[clean-flow/endpoint-side-direction] architecture connections[2] id \"lb-to-app2\" \"lb\" -> \"app2\" first segment 0 [430, 104] -> [470, 205] does not honor fromSide \"bottom\" — it must run vertical downward; keep automatic routing so the renderer can use a side-aware bridge, or set truthful fromSide/toSide with perpendicular via segments.",
+            "subject": {
+              "diagramType": "architecture",
+              "collection": "connections",
+              "index": 2,
+              "id": "lb-to-app2",
+              "from": "lb",
+              "to": "app2"
+            },
+            "evidence": {
+              "endpoint": "source",
+              "authoredField": "fromSide",
+              "sideOrigin": "authored",
+              "side": "bottom",
+              "segmentIndex": 0,
+              "from": [
+                430,
+                104
+              ],
+              "to": [
+                470,
+                205
+              ],
+              "expectedAxis": "vertical",
+              "expectedDirection": "downward"
+            },
+            "supportedFixes": [
+              "keep automatic routing so the renderer can use a side-aware bridge, or set truthful fromSide/toSide with perpendicular via segments"
+            ]
+          }
+        ],
+        "provenance": "failed",
+        "update": {
+          "status": "unavailable",
+          "installedVersion": null,
+          "availableVersion": null,
+          "releaseNotes": null,
+          "checkedAt": null,
+          "source": null,
+          "noticeRequired": false,
+          "noticeText": null,
+          "reason": "disabled"
+        }
+      },
+      "execution": "embedded-in-deliver"
+    },
+    "deliver": {
+      "status": "not-run",
+      "execution": "blocked-by-validate"
+    }
+  },
+  "browserCheck": {
+    "requested": true,
+    "ran": false
+  },
+  "diagnostics": [
+    {
+      "code": "clean-flow/endpoint-side-direction",
+      "severity": "error",
+      "message": "[clean-flow/endpoint-side-direction] architecture connections[2] id \"lb-to-app2\" \"lb\" -> \"app2\" first segment 0 [430, 104] -> [470, 205] does not honor fromSide \"bottom\" — it must run vertical downward; keep automatic routing so the renderer can use a side-aware bridge, or set truthful fromSide/toSide with perpendicular via segments.",
+      "subject": {
+        "diagramType": "architecture",
+        "collection": "connections",
+        "index": 2,
+        "id": "lb-to-app2",
+        "from": "lb",
+        "to": "app2"
+      },
+      "evidence": {
+        "endpoint": "source",
+        "authoredField": "fromSide",
+        "sideOrigin": "authored",
+        "side": "bottom",
+        "segmentIndex": 0,
+        "from": [
+          430,
+          104
+        ],
+        "to": [
+          470,
+          205
+        ],
+        "expectedAxis": "vertical",
+        "expectedDirection": "downward"
+      },
+      "supportedFixes": [
+        "keep automatic routing so the renderer can use a side-aware bridge, or set truthful fromSide/toSide with perpendicular via segments"
+      ]
+    }
+  ],
+  "evidence": {
+    "receipt": "/workspace/.archify/architecture-idp-private-cloud-20261027-215723/review-3/idp-private-cloud.finalize.json",
+    "summaryReceipt": "/workspace/.archify/architecture-idp-private-cloud-20261027-215723/review-3/idp-private-cloud.finalize-summary.json"
+  },
+  "visualReview": "not-requested",
+  "failedStage": "validate",
+  "finishedAt": "2026-10-27T15:41:33.928Z",
+  "durationMs": 658,
+  "update": {
+    "status": "current",
+    "installedVersion": "3.2.0",
+    "availableVersion": "3.2.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-27T15:41:33.530Z",
+    "source": "network",
+    "noticeRequired": false,
+    "noticeText": null
+  }
+}
