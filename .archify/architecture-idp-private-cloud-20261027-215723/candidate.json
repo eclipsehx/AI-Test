@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "IDP 私有云部署架构（武汉私有云-80C）",
+    "locale": "zh-CN",
+    "output": "idp-private-cloud.html",
+    "quality_profile": "showcase"
+  },
+  "components": [
+    { "id": "office", "type": "external", "label": "办公网", "sublabel": "用户接入侧", "pos": [40, 40], "size": [140, 64] },
+    { "id": "lb", "type": "cloud", "label": "负载均衡", "sublabel": "10.3.153.22:xxxxx", "pos": [360, 40], "size": [140, 64] },
+    { "id": "sso", "type": "security", "label": "SSO", "sublabel": "sso.chinau…ms.com", "pos": [560, 40], "size": [140, 64] },
+    { "id": "integration", "type": "backend", "label": "内部集成平台", "pos": [795, 40], "size": [150, 64] },
+    { "id": "ocr", "type": "cloud", "label": "研究院OCR V2", "pos": [1040, 40], "size": [140, 64] },
+
+    { "id": "bos", "type": "database", "label": "对象存储-BOS", "sublabel": "ceph.whlocal.com:8080", "pos": [40, 240], "size": [140, 64] },
+    { "id": "app1", "type": "backend", "label": "idp-app1", "sublabel": "10.11.54.36", "pos": [360, 240], "size": [140, 64] },
+    { "id": "app2", "type": "backend", "label": "idp-app2", "sublabel": "10.11.54.37", "pos": [560, 240], "size": [140, 64] },
+    { "id": "cfs", "type": "cloud", "label": "网络文件系统-CFS", "sublabel": "cfs-vSUT61B6XS.lb-9e939506", "pos": [785, 240], "size": [170, 64] },
+
+    { "id": "redis", "type": "database", "label": "缓存-Redis", "sublabel": "10.11.67.235:2916", "pos": [40, 380], "size": [140, 64] },
+    { "id": "db1", "type": "database", "label": "idp-db1", "sublabel": "10.11.54.38", "pos": [360, 460], "size": [140, 64] },
+    { "id": "db2", "type": "database", "label": "idp-db02", "sublabel": "10.11.54.39", "pos": [560, 460], "size": [140, 64] },
+    { "id": "db3", "type": "database", "label": "idp-db3", "sublabel": "10.11.54.40", "pos": [760, 460], "size": [140, 64] },
+
+    { "id": "rds", "type": "database", "label": "关系数据库-RDS", "sublabel": "10.11.33.175:3306", "pos": [40, 520], "size": [140, 64] },
+    { "id": "oss", "type": "database", "label": "对象存储-OSS", "sublabel": "10.1.1.198:8800", "pos": [1040, 440], "size": [130, 64] }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "武汉私有云-80C", "wraps": ["app1", "app2", "cfs", "db1", "db2", "db3"], "pad": 40 },
+    { "kind": "security-group", "label": "Web 应用服务器", "wraps": ["app1", "app2"], "pad": 24 },
+    { "kind": "security-group", "label": "数据库服务器（Elasticsearch）", "wraps": ["db1", "db2", "db3"], "pad": 24 },
+    { "kind": "region", "label": "上海容器云", "wraps": ["oss"], "pad": 24 }
+  ],
+  "connections": [
+    { "id": "office-to-lb", "from": "office", "to": "lb", "label": "接入", "variant": "emphasis" },
+    { "id": "lb-to-app1", "from": "lb", "to": "app1", "label": "负载分发", "variant": "emphasis", "fromSide": "bottom", "toSide": "top" },
+    { "id": "app2-to-sso", "from": "app2", "to": "sso", "label": "SSO 单点登录", "variant": "security", "fromSide": "top", "toSide": "bottom" },
+    { "id": "cfs-to-integration", "from": "cfs", "to": "integration", "label": "内部集成", "fromSide": "top", "toSide": "bottom" },
+    { "id": "integration-to-ocr", "from": "integration", "to": "ocr", "label": "OCR 识别" },
+    { "id": "app1-to-bos", "from": "app1", "to": "bos", "label": "对象存储", "fromSide": "left", "toSide": "right" },
+    { "id": "app1-to-redis", "from": "app1", "to": "redis", "label": "读缓存" },
+    { "id": "app1-to-rds", "from": "app1", "to": "rds", "label": "关系数据" },
+    { "id": "app2-to-db2", "from": "app2", "to": "db2", "label": "读写", "variant": "emphasis", "fromSide": "bottom", "toSide": "top" },
+    { "id": "app2-to-cfs", "from": "app2", "to": "cfs", "label": "文件共享", "fromSide": "right", "toSide": "left" },
+    { "id": "cfs-to-oss", "from": "cfs", "to": "oss", "label": "跨云同步", "fromSide": "bottom", "toSide": "top", "via": [[870, 380], [1105, 380]] },
+    { "id": "db1-to-db2", "from": "db1", "to": "db2", "label": "复制", "fromSide": "right", "toSide": "left" },
+    { "id": "db2-to-db3", "from": "db2", "to": "db3", "label": "复制", "fromSide": "right", "toSide": "left" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "接入与认证", "items": ["办公网经负载均衡 10.3.153.22 进入 Web 应用服务器", "SSO 单点登录：sso.chinau…ms.com（原图域名可辨识部分）"] },
+    { "dot": "emerald", "title": "应用与检索集群", "items": ["Web 应用服务器：idp-app1 10.11.54.36、idp-app2 10.11.54.37", "数据库服务器（Elasticsearch）：idp-db1 10.11.54.38、idp-db02 10.11.54.39、idp-db3 10.11.54.40"] },
+    { "dot": "amber", "title": "存储与外部依赖", "items": ["BOS：ceph.whlocal.com:8080；Redis：10.11.67.235:2916；RDS：10.11.33.175:3306", "CFS：cfs-vSUT61B6XS.lb-9e939506.whlocal.com", "上海容器云 OSS：10.1.1.198:8800"] }
+  ]
+}
